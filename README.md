@@ -10,20 +10,7 @@ This project builds a production-style predictive maintenance system on the NASA
 
 ## Architecture
 
-NASA Bearing Data → Kafka Simulation → PostgreSQL
-↓
-Feature Engineering
-(RMS, Kurtosis, FFT)
-↓
-┌─────────────────────────┐
-│ Isolation Forest │
-│ Autoencoder (PyTorch) │
-│ MLflow Tracking │
-└─────────────────────────┘
-↓
-FastAPI /predict
-↓
-Streamlit Dashboard
+![Architecture](notebooks/architecture.png)
 
 ## Tech Stack
 
@@ -111,19 +98,6 @@ Response:
   "consensus": "anomaly"
 }
 ```
-
-## Project Structure
-
-├── data/raw/bearing/ ← NASA sensor files
-├── src/
-│ ├── ingest/ ← Kafka simulation, PostgreSQL ingestion
-│ ├── features/ ← Feature engineering
-│ ├── models/ ← Isolation Forest, Autoencoder training
-│ ├── api/ ← FastAPI serving
-│ └── dashboard/ ← Streamlit dashboard
-├── notebooks/ ← EDA plots
-├── Dockerfile
-└── requirements.txt
 
 ## Author
 
