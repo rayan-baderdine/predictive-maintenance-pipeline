@@ -4,6 +4,9 @@ End-to-end MLOps pipeline for industrial bearing fault detection using real sens
 
 ![Dashboard](notebooks/rms_over_time.png)
 
+## 📝 Article
+[Read the full writeup on Medium](https://medium.com/@baderdinerayan19/building-a-production-ready-predictive-maintenance-pipeline-from-scratch-49df66c7414f)
+
 ## Overview
 
 This project builds a production-style predictive maintenance system on the NASA Bearing Dataset. It simulates a real industrial IoT pipeline: streaming ingestion → feature engineering → anomaly detection → model serving → live dashboard.
