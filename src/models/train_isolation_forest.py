@@ -54,6 +54,14 @@ def train():
         mlflow.log_metric("anomaly_rate", float(n_anomalies / len(predictions)))
         mlflow.sklearn.log_model(model, "isolation_forest_model")
         
+        with open(f"{MODEL_DIR}/isolation_forest.pkl", "wb") as f:
+            pickle.dump(model, f)
+        mlflow.log_artifact(f"{MODEL_DIR}/isolation_forest.pkl")
+
+        with open(f"{MODEL_DIR}/scaler_if.pkl", "wb") as f:
+            pickle.dump(scaler, f)
+        mlflow.log_artifact(f"{MODEL_DIR}/scaler_if.pkl")
+
         with open(f"{MODEL_DIR}/scaler_if.pkl", "wb") as f:
             pickle.dump(scaler, f)
         mlflow.log_artifact(f"{MODEL_DIR}/scaler_if.pkl")
