@@ -19,9 +19,6 @@ def load_data():
 
 df = load_data()
 
-df = df.merge(if_results, on=["window_start", "window_end"])
-df = df.merge(ae_results, on=["window_start", "window_end"])
-
 # ── Sidebar ──────────────────────────────────────────────
 st.sidebar.header("Controls")
 channel = st.sidebar.selectbox("Channel", ["ch1", "ch2", "ch3", "ch4"])
