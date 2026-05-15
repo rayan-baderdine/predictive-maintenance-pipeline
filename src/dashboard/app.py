@@ -1,10 +1,6 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-from sqlalchemy import create_engine
-
-DB_URL = "postgresql://postgres:0000@localhost:5432/bearing_db"
 
 st.set_page_config(page_title="Predictive Maintenance Dashboard", layout="wide")
 st.title("Predictive Maintenance Dashboard")
@@ -12,7 +8,6 @@ st.caption("NASA Bearing Dataset — Anomaly Detection")
 
 @st.cache_data
 def load_data():
-    st.write(df.columns.tolist())  # temporary debug line
     features = pd.read_csv("models/features.csv")
     if_results = pd.read_csv("models/if_results.csv")
     ae_results = pd.read_csv("models/ae_results.csv")
@@ -20,15 +15,15 @@ def load_data():
     df = df.merge(ae_results, on=["window_start", "window_end"])
     return df
 
+df = load_data()
+
 # ── Sidebar ──────────────────────────────────────────────
 st.sidebar.header("Controls")
 channel = st.sidebar.selectbox("Channel", ["ch1", "ch2", "ch3", "ch4"])
-ae_threshold = st.sidebar.slider(
-    "Autoencoder threshold",
-    float(df["ae_error"].min()),
-    float(df["ae_error"].max()),
-    float(df["ae_error"].quantile(0.85))
-)
+ae_min = float(df["ae_error"].min())
+ae_max = float(df["ae_error"].max())
+ae_default = float(df["ae_error"].quantile(0.85))
+ae_threshold = st.sidebar.slider("Autoencoder threshold", ae_min, ae_max, ae_default)
 df["ae_label_live"] = (df["ae_error"] > ae_threshold).astype(int)
 
 # ── KPI row ──────────────────────────────────────────────
@@ -68,8 +63,7 @@ st.pyplot(fig2)
 st.subheader("Autoencoder reconstruction error")
 fig3, ax3 = plt.subplots(figsize=(12, 3))
 ax3.plot(df["window_start"], df["ae_error"], color="purple")
-ax3.axhline(ae_threshold, color="red", linestyle="--",
-            label=f"Threshold ({ae_threshold:.4f})")
+ax3.axhline(ae_threshold, color="red", linestyle="--", label=f"Threshold ({ae_threshold:.4f})")
 ax3.legend()
 ax3.set_xlabel("Window")
 ax3.set_ylabel("MSE")
