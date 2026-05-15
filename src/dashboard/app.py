@@ -12,12 +12,12 @@ st.caption("NASA Bearing Dataset — Anomaly Detection")
 
 @st.cache_data
 def load_data():
-    features = pd.read_csv("models/if_results.csv")
-    ae = pd.read_csv("models/ae_results.csv")
-    df = features.merge(ae, on=["window_start", "window_end"])
+    features = pd.read_csv("models/features.csv")
+    if_results = pd.read_csv("models/if_results.csv")
+    ae_results = pd.read_csv("models/ae_results.csv")
+    df = features.merge(if_results, on=["window_start", "window_end"])
+    df = df.merge(ae_results, on=["window_start", "window_end"])
     return df
-
-df = load_data()
 
 # ── Sidebar ──────────────────────────────────────────────
 st.sidebar.header("Controls")
