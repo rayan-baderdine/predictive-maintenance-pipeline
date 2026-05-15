@@ -6,7 +6,7 @@ End-to-end MLOps pipeline for industrial bearing fault detection using real sens
 
 ## 📝 Article
 
-[Read the full writeup on Medium](https://medium.com/@baderdinerayan19/building-a-production-ready-predictive-maintenance-pipeline-from-scratch-49df66c7414f)
+[Read the full writeup on GoPenAI](https://blog.gopenai.com/building-a-production-ready-predictive-maintenance-pipeline-from-scratch-49df66c7414f)
 
 ## Overview
 
@@ -106,7 +106,6 @@ Response:
 ## Live Demo
 
 - **Dashboard:** https://predictive-maintenance-rayan.streamlit.app
-- **API docs:** https://github.com/rayan-baderdine/predictive-maintenance-pipeline
 
 ## Author
 
