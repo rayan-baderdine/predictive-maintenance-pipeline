@@ -12,6 +12,7 @@ st.caption("NASA Bearing Dataset — Anomaly Detection")
 
 @st.cache_data
 def load_data():
+    st.write(df.columns.tolist())  # temporary debug line
     features = pd.read_csv("models/features.csv")
     if_results = pd.read_csv("models/if_results.csv")
     ae_results = pd.read_csv("models/ae_results.csv")
